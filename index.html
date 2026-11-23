@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nidhin | IAM Architect</title>
+<meta name="description" content="Nidhin — Identity & Access Management Architect. Active Directory, Microsoft Entra ID, CyberArk Privilege Cloud, Okta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1020; --bg-alt:#11182d; --card:#151d35; --border:#24304f;
+    --text:#e6e9f2; --muted:#9aa3b8; --accent:#3ddc97; --accent-2:#4f8cff;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  [data-theme="light"]{
+    --bg:#f7f8fb; --bg-alt:#eef1f7; --card:#ffffff; --border:#dde3ee;
+    --text:#141a2b; --muted:#5b6478; --accent:#0f9d63; --accent-2:#2f6fe4;
+    --shadow:0 10px 30px rgba(20,26,43,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .3s,color .3s}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .container{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* Nav */
+  header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:700;font-size:1.25rem}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+  .nav-links a{color:var(--muted);font-size:.95rem;transition:color .2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-actions{display:flex;gap:8px;align-items:center}
+  .icon-btn{background:none;border:1px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1.05rem;display:grid;place-items:center}
+  .icon-btn:hover{border-color:var(--accent)}
+  #menuBtn{display:none}
+
+  /* Hero */
+  .hero{padding-top:110px;padding-bottom:90px}
+  .hero .tag{color:var(--accent);font-size:.95rem;margin-bottom:14px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4rem);line-height:1.1;font-weight:700}
+  .hero h2{font-size:clamp(1.3rem,3vw,2rem);color:var(--muted);font-weight:500;margin-top:10px}
+  .hero p{max-width:640px;color:var(--muted);margin-top:22px;font-size:1.05rem}
+  .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{padding:12px 22px;border-radius:10px;font-weight:600;font-size:.95rem;border:1px solid var(--accent);transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:#06140e}
+  .btn-ghost{color:var(--accent)}
+  .stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
+  .stat b{display:block;font-size:1.9rem;color:var(--text)}
+  .stat span{color:var(--muted);font-size:.9rem}
+
+  /* Sections */
+  section{padding:80px 0}
+  section.alt{background:var(--bg-alt)}
+  .section-title{font-size:1.8rem;font-weight:700;margin-bottom:8px}
+  .section-title::before{content:"// ";color:var(--accent);font-family:"JetBrains Mono",monospace;font-size:1.2rem}
+  .section-sub{color:var(--muted);margin-bottom:40px}
+  .grid{display:grid;gap:20px}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card h3{font-size:1.1rem;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .card .icon{font-size:1.6rem;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:.75rem;padding:4px 10px;border-radius:999px;border:1px solid var(--border);color:var(--accent-2)}
+
+  .about{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+  .about p{color:var(--muted);margin-bottom:16px}
+  .about ul{list-style:none}
+  .about li{padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;font-size:.95rem}
+  .about li span:first-child{color:var(--muted)}
+
+  /* Timeline */
+  .timeline{border-left:2px solid var(--border);margin-left:8px}
+  .t-item{position:relative;padding:0 0 34px 28px}
+  .t-item::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+  .t-item h3{font-size:1.1rem}
+  .t-item .meta{color:var(--accent-2);font-size:.85rem;margin:2px 0 8px}
+  .t-item ul{color:var(--muted);padding-left:18px;font-size:.95rem}
+
+  .cert{display:flex;gap:14px;align-items:center}
+  .cert .badge{width:46px;height:46px;flex-shrink:0;border-radius:12px;background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:.8rem}
+
+  .repo-meta{display:flex;gap:14px;margin-top:14px;font-size:.8rem;color:var(--muted)}
+
+  .contact{text-align:center}
+  .contact p{color:var(--muted);max-width:560px;margin:0 auto 30px}
+  .socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+  footer{padding:28px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+  .reveal.show{opacity:1;transform:none}
+
+  @media (max-width:820px){
+    #menuBtn{display:grid}
+    .nav-links{position:fixed;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .3s}
+    .nav-links.open{max-height:400px}
+    .nav-links li{width:100%;text-align:center}
+    .nav-links a{display:block;padding:14px}
+    .about{grid-template-columns:1fr}
+    .hero{padding-top:70px;padding-bottom:60px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo">Nidhin<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#scripts">Scripts</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☀️</button>
+        <button class="icon-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <!-- HERO -->
+  <div class="container hero">
+    <p class="tag mono">Hi, my name is</p>
+    <h1>Nidhin</h1>
+    <h2>Identity &amp; Access Management Architect</h2>
+    <p>I design and secure enterprise identity platforms across Active Directory, Microsoft Entra ID,
+       CyberArk Privilege Cloud and Okta, from hybrid identity architecture and privileged access to
+       directory hardening and large-scale forest separations.</p>
+    <div class="cta">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#scripts" class="btn btn-ghost">View my scripts</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>18+</b><span>Years in IAM</span></div>
+      <div class="stat"><b>5</b><span>Certifications</span></div>
+      <div class="stat"><b>4</b><span>Core identity platforms</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="alt">
+    <div class="container">
+      <h2 class="section-title reveal">About me</h2>
+      <p class="section-sub reveal">A short introduction</p>
+      <div class="about reveal">
+        <div>
+          <p>I'm an IAM Architect at <strong>Flex</strong>, a global manufacturing company, with over 18 years of
+             hands-on experience in Identity and Access Management.</p>
+          <p>My work spans securing on-prem Active Directory, hardening Microsoft Entra ID against
+             industry benchmarks, building out privileged access with CyberArk Privilege Cloud, and
+             federating identity with Okta. I've led complex hybrid identity programs, including corporate
+             forest separations as part of a company divestiture.</p>
+          <p>I like turning security standards into practical, automated controls, often with PowerShell.</p>
+        </div>
+        <ul>
+          <li><span>Role</span><span>IAM Architect</span></li>
+          <li><span>Company</span><span>Flex</span></li>
+          <li><span>Location</span><span>Chennai, India</span></li>
+          <li><span>Experience</span><span>18+ years</span></li>
+          <li><span>Focus</span><span>Hybrid identity &amp; PAM</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <div class="container">
+      <h2 class="section-title reveal">Expertise</h2>
+      <p class="section-sub reveal">Platforms and areas I work in every day</p>
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <div class="icon">🏛️</div>
+          <h3>Active Directory</h3>
+          <p>Directory hardening, forest design and migration, DC recovery, and legacy protocol retirement.</p>
+          <div class="chips"><span class="chip">Kerberos AES</span><span class="chip">LDAP signing</span><span class="chip">NTLMv1 removal</span><span class="chip">Forest recovery</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon">☁️</div>
+          <h3>Microsoft Entra ID</h3>
+          <p>Tenant security assessment and hardening, Conditional Access design, and hybrid identity.</p>
+          <div class="chips"><span class="chip">CIS M365</span><span class="chip">Conditional Access</span><span class="chip">CAE</span><span class="chip">Entra Connect</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon">🔐</div>
+          <h3>CyberArk Privilege Cloud</h3>
+          <p>PAM implementation and operations: session isolation, credential rotation, and app-to-app secrets.</p>
+          <div class="chips"><span class="chip">PSM</span><span class="chip">CPM</span><span class="chip">CCP REST API</span><span class="chip">Secure Cloud Access</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon">🔗</div>
+          <h3>Okta Federation</h3>
+          <p>Federation between Okta and Entra ID, SSO for enterprise apps, and lifecycle integration.</p>
+          <div class="chips"><span class="chip">SAML</span><span class="chip">OIDC</span><span class="chip">SCIM</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon">📋</div>
+          <h3>Identity Governance</h3>
+          <p>Access models, joiner/mover/leaver processes, access reviews, and least-privilege design.</p>
+          <div class="chips"><span class="chip">RBAC</span><span class="chip">Access reviews</span><span class="chip">JML</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon">⚡</div>
+          <h3>Automation</h3>
+          <p>PowerShell tooling for auditing, remediation and reporting across AD, Entra and PAM.</p>
+          <div class="chips"><span class="chip">PowerShell</span><span class="chip">Microsoft Graph</span><span class="chip">REST APIs</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE / HIGHLIGHTS -->
+  <section id="experience" class="alt">
+    <div class="container">
+      <h2 class="section-title reveal">Experience highlights</h2>
+      <p class="section-sub reveal">Selected programs I've led</p>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <h3>IAM Workstream Lead, Corporate Separation Program</h3>
+          <p class="meta mono">Flex · IAM Architect</p>
+          <ul>
+            <li>Leading identity separation for a corporate divestiture, including AD forest migration.</li>
+            <li>Planning the PAM transition and Entra ID / Okta federation for the new entity.</li>
+          </ul>
+        </div>
+        <div class="t-item reveal">
+          <h3>Active Directory Security Remediation</h3>
+          <p class="meta mono">Flex</p>
+          <ul>
+            <li>Driving Kerberos RC4 deprecation, LDAP signing and channel binding, and NTLMv1 retirement.</li>
+            <li>Defining domain controller and forest recovery procedures.</li>
+          </ul>
+        </div>
+        <div class="t-item reveal">
+          <h3>Microsoft Entra ID Hardening</h3>
+          <p class="meta mono">Flex</p>
+          <ul>
+            <li>Aligning the tenant with the CIS Microsoft 365 benchmark and tracking remediation.</li>
+            <li>Redesigning Conditional Access and rolling out Continuous Access Evaluation.</li>
+          </ul>
+        </div>
+        <div class="t-item reveal">
+          <h3>CyberArk Privilege Cloud Implementation</h3>
+          <p class="meta mono">Flex</p>
+          <ul>
+            <li>Implemented PSM/CPM, dual-account rotation, and CCP REST API integrations.</li>
+            <li>Extended privileged access to cloud platforms with Secure Cloud Access.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="container">
+      <h2 class="section-title reveal">Certifications</h2>
+      <p class="section-sub reveal">Industry credentials</p>
+      <div class="grid grid-3">
+        <div class="card cert reveal"><div class="badge">PAM</div><div><h3>CyberArk Defender – PAM</h3><p>CyberArk</p></div></div>
+        <div class="card cert reveal"><div class="badge">OKTA</div><div><h3>Okta Certified Professional</h3><p>Okta</p></div></div>
+        <div class="card cert reveal"><div class="badge">AZ</div><div><h3>Azure Fundamentals</h3><p>Microsoft</p></div></div>
+        <div class="card cert reveal"><div class="badge">ITIL</div><div><h3>ITIL Foundation</h3><p>AXELOS</p></div></div>
+        <div class="card cert reveal"><div class="badge">VCA</div><div><h3>VCA-DCV</h3><p>VMware</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTS (auto-loaded from GitHub) -->
+  <section id="scripts" class="alt">
+    <div class="container">
+      <h2 class="section-title reveal">PowerShell &amp; projects</h2>
+      <p class="section-sub reveal">Public repositories, loaded live from GitHub</p>
+      <div class="grid grid-2" id="repoGrid">
+        <div class="card"><p>Loading repositories…</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container contact">
+      <h2 class="section-title reveal">Get in touch</h2>
+      <p class="reveal">Open to conversations about identity architecture, privileged access and directory security.</p>
+      <div class="socials reveal">
+        <a class="btn btn-primary" id="emailLink" href="#">✉️ Email</a>
+        <a class="btn btn-ghost" id="linkedinLink" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">© <span id="year"></span> Nidhin · Built with HTML &amp; hosted on GitHub Pages</div>
+</footer>
+
+<script>
+  /* ====== EDIT THESE ====== */
+  const CONFIG = {
+    githubUser: "Nidhinck05",
+    email:      "you@example.com",
+    linkedin:   "https://www.linkedin.com/in/YOUR-PROFILE/",
+    maxRepos:   6
+  };
+  /* ======================== */
+
+  // Links
+  document.getElementById("emailLink").href = "mailto:" + CONFIG.email;
+  document.getElementById("linkedinLink").href = CONFIG.linkedin;
+  document.getElementById("githubLink").href = "https://github.com/" + CONFIG.githubUser;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Theme toggle (remembers choice)
+  const root = document.documentElement, themeBtn = document.getElementById("themeBtn");
+  function setTheme(t){ root.dataset.theme = t; themeBtn.textContent = t === "dark" ? "☀️" : "🌙";
+    try{ localStorage.setItem("theme", t); }catch(e){} }
+  let saved = null; try{ saved = localStorage.getItem("theme"); }catch(e){}
+  setTheme(saved || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
+  themeBtn.onclick = () => setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+
+  // Mobile menu
+  const navLinks = document.getElementById("navLinks");
+  document.getElementById("menuBtn").onclick = () => navLinks.classList.toggle("open");
+  navLinks.querySelectorAll("a").forEach(a => a.onclick = () => navLinks.classList.remove("open"));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("show"); io.unobserve(e.target);} }), {threshold:.1});
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // GitHub repos
+  const grid = document.getElementById("repoGrid");
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  if (CONFIG.githubUser.startsWith("YOUR-")) {
+    grid.innerHTML = '<div class="card"><p>Set <code>githubUser</code> in the CONFIG block to show your repositories here.</p></div>';
+  } else {
+    fetch(`https://api.github.com/users/${CONFIG.githubUser}/repos?sort=updated&per_page=50`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(repos => {
+        repos = repos.filter(r => !r.fork && r.name.toLowerCase() !== `${CONFIG.githubUser.toLowerCase()}.github.io`).slice(0, CONFIG.maxRepos);
+        if (!repos.length) { grid.innerHTML = '<div class="card"><p>No public repositories yet.</p></div>'; return; }
+        grid.innerHTML = repos.map(r => `
+          <a class="card" href="${esc(r.html_url)}" target="_blank" rel="noopener">
+            <h3>📁 ${esc(r.name)}</h3>
+            <p>${esc(r.description || "No description provided.")}</p>
+            <div class="repo-meta mono"><span>● ${esc(r.language || "—")}</span><span>★ ${r.stargazers_count}</span><span>Updated ${new Date(r.updated_at).toLocaleDateString()}</span></div>
+          </a>`).join("");
+      })
+      .catch(() => { grid.innerHTML = `<div class="card"><p>Couldn't load repositories. <a href="https://github.com/${esc(CONFIG.githubUser)}" style="color:var(--accent)">View on GitHub →</a></p></div>`; });
+  }
+</script>
+</body>
+</html>
